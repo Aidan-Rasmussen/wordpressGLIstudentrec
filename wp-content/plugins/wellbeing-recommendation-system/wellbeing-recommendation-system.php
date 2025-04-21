@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Well-being Recommendation Survey
-Description: A custom plugin to recommend housing options based on user survey input.
-Version: 1.2
-Author: Your Name
+Description: A custom plugin to recommend housing options based on user survey input. Made for Rent, Stress and Student Success GLI Capstone 2025
+Version: 1.3
+Author: Aidan Rasmussen McGee
 */
 
 add_shortcode('wellbeing_recommendation_form', 'render_wellbeing_recommendation_form');
@@ -86,16 +86,16 @@ function render_wellbeing_recommendation_form() {
     <form method="post">
         <?php
         $fields = [
-            "universityCollege" => ["University of Montana", "Missoula College"],
-            "academicYear" => ["Freshman", "Sophomore", "Junior", "Senior"],
-            "age" => ["17 or younger", "18", "19", "20", "21", "22", "23", "Older than 23 years"],
-            "gender" => ["Man", "Woman", "Non-binary", "Prefer To Self Describe below"],
-            "inpersonRemote" => ["In-person student (most classes on campus)", "Remote student (all classes online)"],
-            "credits" => ["1-6", "7-12", "13-18", "More than 19"],
-            "fulltimeParttime" => ["Full-time student", "Part-time student"],
-            "liveWithHowMany" => ["1", "2", "3", "4", "5", "More than 5"],
-            "monthlyRent" => ["$250 or less", "$251 - $500", "$501 - $750", "$751 - $1,000", "$1,001 - $1,250", "$1,251 - $1,500", "$1,501 - $1,750", "$1,751 - $2,000", "More than $2,000", "I do not pay rent"],
-            "universityCostsPerSemester" => [
+            "Are you a student at the University of Montana or Missoula College?" => ["University of Montana", "Missoula College"],
+            "What is your academic year?" => ["Freshman", "Sophomore", "Junior", "Senior"],
+            "What is your age?" => ["17 or younger", "18", "19", "20", "21", "22", "23", "Older than 23 years"],
+            "What is your gender?" => ["Man", "Woman", "Non-binary", "Other"],
+            "Are you an inperson student or remote?" => ["In-person student (most classes on campus)", "Remote student (all classes online)"],
+            "How many credits are you taking this semester, or plan to?" => ["1-6", "7-12", "13-18", "More than 19"],
+            "Are you a Full-Time student or Part-Time?" => ["Full-time student", "Part-time student"],
+            "How many others would you be willing to live with or plan to live with?" => ["0","1", "2", "3", "4", "5", "More than 5"],
+            "How much would you be willing to pay each month in rent?" => ["$250 or less", "$251 - $500", "$501 - $750", "$751 - $1,000", "$1,001 - $1,250", "$1,251 - $1,500", "$1,501 - $1,750", "$1,751 - $2,000", "More than $2,000", "I do not pay rent"],
+            "What are your university costs each semester? (Include tuition, food expenses, and other related costs)" => [
                 "I do not have any University-related expenses (my expenses are paid by outside sources, such as family support or scholarships)",
                 "$1 - $1,000", "$1,001 - $2,000", "$2,001 - $3,000", "$3,001 - $4,000", "$4,001 - $5,000",
                 "$5,001 - $6,000", "$6,001 - $7,000", "$7,001 - $8,000", "$8,001 - $9,000", "$9,001 - $10,000", "More than $10,000"
@@ -140,7 +140,7 @@ function render_wellbeing_recommendation_form() {
     <?php
     if (isset($_POST['submit_survey'])) {
         $input = array_map('sanitize_text_field', $_POST);
-        $csv = plugin_dir_path(__FILE__) . 'surveyDataScoredLatest.csv';
+        $csv = plugin_dir_path(__FILE__) . 'housingDataPlugin.csv';
 
         if (!file_exists($csv)) {
             echo "<p>Error: CSV file not found.</p>";
